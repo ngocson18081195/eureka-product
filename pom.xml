@@ -6,7 +6,7 @@
     <groupId>eureka-product</groupId>
     <artifactId>eureka-product</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
     <name>eureka-product</name>
     <description>Demo project for Spring Boot</description>
 
