@@ -26,11 +26,11 @@ eureka:
     register-with-eureka: true
     serviceUrl:
       defaultZone: https://floating-eyrie-61261.herokuapp.com/eureka/
-#spring:
-#  datasource:
-#    url: jdbc:postgresql://ec2-50-19-127-115.compute-1.amazonaws.com:5432/d4f1cvn11jrimi
-#    username: kokaklgsluujji
-#    password: bc49bb4e42120fcc3cead38fcd9a33142659fb02bd088e226bb9749cffe8214b
+spring:
+  datasource:
+    url: jdbc:postgresql://ec2-54-83-201-84.compute-1.amazonaws.com:5432/dev9d14c7kiip4?sslmode=require&user=gqjbwvgtbcfthh&password=91fe711ea8e1eefbeaaf6dcee1d1ca7175eb1bf7887f547bcaa386b07a367a2f
+    username: gqjbwvgtbcfthh
+    password: 91fe711ea8e1eefbeaaf6dcee1d1ca7175eb1bf7887f547bcaa386b07a367a2f
 #  jpa:
 #    show-sql: true
 #    hibernate:
