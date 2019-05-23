@@ -13,7 +13,7 @@ import java.util.List;
  */
 @RefreshScope
 @RestController
-//@RequestMapping(value = "/product")
+@RequestMapping(value = "/product")
 public class productController {
 //    private List<ProductDTO> productDTOS = Arrays.asList(
 //            new ProductDTO(1L, "Dress"),
