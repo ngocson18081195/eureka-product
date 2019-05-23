@@ -1,4 +1,12 @@
 server.port: 8081
+
+spring.datasource.driverClassName: org.postgresql.Driver
+spring.datasource.maxActive: 10
+spring.datasource.maxIdle: 5
+spring.datasource.minIdle: 2
+spring.datasource.initialSize: 5
+spring.datasource.removeAbandoned: true
+
 #management.security.enabled=false
 #management.endpoints.web.exposure.include=*
 
