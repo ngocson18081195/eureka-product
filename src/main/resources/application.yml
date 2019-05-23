@@ -1,0 +1,56 @@
+server.port: 8081
+#management.security.enabled=false
+#management.endpoints.web.exposure.include=*
+
+#spring.rabbitmq.host=localhost
+#spring.rabbitmq.port=5672
+#spring.rabbitmq.username=guest
+#spring.rabbitmq.password=guest
+#eureka.client.region = default
+#spring.cloud.config.discovery.service-id=config
+#spring.cloud.config.discovery.enabled=true
+#eureka.client.register-with-eureka=true
+#eureka.client.fetch-registry=true
+#eureka.client.serviceUrl.defaultZone=https://floating-eyrie-61261.herokuapp.com//eureka/
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: https://floating-eyrie-61261.herokuapp.com/eureka/
+#spring:
+#  datasource:
+#    url: jdbc:postgresql://ec2-50-19-127-115.compute-1.amazonaws.com:5432/d4f1cvn11jrimi
+#    username: kokaklgsluujji
+#    password: bc49bb4e42120fcc3cead38fcd9a33142659fb02bd088e226bb9749cffe8214b
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+#    properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+
+
+
+
+
+
+#spring:
+#  cloud:
+#    zookeeper:
+#      connectString: localhost:2181
+#    stream:
+#      bindings:
+#        pvout:
+#          destination: orgChangeTopic
+#          producer.header-mode: raw
+#          content-type: application/json
+#      kafka:
+#        binder:
+#          configuration:
+#            commit.interval.mms: 1000
+#            default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+#            default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+
+#            zkNodes: localhost
+#            brokers: localhost
+#eureka.client.serviceUrl.defaultZone=http://localhost:8000/eureka/
