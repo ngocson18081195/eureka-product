@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface productRepository extends CrudRepository<ProductEntity, Long> {
-    ProductEntity findByProductId(String productId);
+    ProductEntity findByProductName(String productName);
 }

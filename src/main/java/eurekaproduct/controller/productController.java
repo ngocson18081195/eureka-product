@@ -1,5 +1,8 @@
 package eurekaproduct.controller;
 
+import eurekaproduct.entity.ProductEntity;
+import eurekaproduct.repository.productRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
@@ -15,18 +18,25 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/")
 public class productController {
-//    private List<ProductDTO> productDTOS = Arrays.asList(
-//            new ProductDTO(1L, "Dress"),
-//            new ProductDTO(2L, "Clothes")
-//    );
 
     @Value("${app.service-name}")
     private String serviceName;
 
-//    @GetMapping(value = "/list")
-//    public ResponseEntity getAllList() {
-//        return ResponseEntity.ok(productDTOS);
-//    }
+    @Autowired
+    private productRepository productRepository;
+
+    @GetMapping(value = "/list")
+    public ResponseEntity getAllList() {
+        return ResponseEntity.ok(productRepository.findAll());
+    }
+
+    @GetMapping(value = "/create")
+    public ResponseEntity createProduct() {
+        ProductEntity productEntity = new ProductEntity();
+//        productEntity.setId((long) 1);
+        productEntity.setProductName("Son");
+        return ResponseEntity.ok(productRepository.save(productEntity));
+    }
 //
 //    @GetMapping(value = "/{productId}")
 //    public ResponseEntity findProduct(@PathVariable Long productId) {
