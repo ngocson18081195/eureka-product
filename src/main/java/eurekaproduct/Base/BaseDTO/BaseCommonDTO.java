@@ -1,4 +1,4 @@
-package eurekaproduct.DTO;
+package eurekaproduct.Base.BaseDTO;
 
 import lombok.Data;
 

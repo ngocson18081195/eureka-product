@@ -1,6 +1,6 @@
 package eurekaproduct.entity;
 
-import eurekaproduct.BaseEntity.BaseEntity;
+import eurekaproduct.Base.BaseEntity.BaseEntity;
 import lombok.Data;
 import lombok.ToString;
 

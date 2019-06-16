@@ -1,5 +1,6 @@
 package eurekaproduct.controller;
 
+import eurekaproduct.Base.BaseController.BaseController;
 import eurekaproduct.entity.ProductEntity;
 import eurekaproduct.repository.productRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import java.util.List;
 @RefreshScope
 @RestController
 @RequestMapping(value = "/")
-public class productController {
+public class productController extends BaseController {
 
     @Value("${app.service-name}")
     private String serviceName;

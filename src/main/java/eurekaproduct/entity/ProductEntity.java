@@ -1,9 +1,7 @@
 package eurekaproduct.entity;
 
-import eurekaproduct.BaseEntity.BaseCommonEntity;
-import eurekaproduct.BaseEntity.BaseEntity;
+import eurekaproduct.Base.BaseEntity.BaseCommonEntity;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
