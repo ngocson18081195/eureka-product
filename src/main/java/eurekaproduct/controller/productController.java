@@ -34,7 +34,7 @@ public class productController {
     public ResponseEntity createProduct() {
         ProductEntity productEntity = new ProductEntity();
 //        productEntity.setId((long) 1);
-        productEntity.setProductName("Son");
+        productEntity.setName("Son");
         return ResponseEntity.ok(productRepository.save(productEntity));
     }
 //

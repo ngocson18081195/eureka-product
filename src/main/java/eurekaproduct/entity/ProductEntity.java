@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Create by ngocson on 18/05/2019
@@ -16,21 +17,24 @@ import java.util.Date;
 @Data
 public class ProductEntity extends BaseCommonEntity {
 
-    @Column(name = "ProductCode")
+    @Column(name = "ProductCode", nullable = true)
     private String code;
 
-    @Column(name = "Price")
+    @Column(name = "Price", nullable = true)
     private double price;
 
-    @Column(name = "ImageUrl")
+    @Column(name = "ImageUrl", nullable = true)
     private String imageUrl;
 
-    @Column(name = "WeightKg")
+    @Column(name = "WeightKg", nullable = true)
     private double weightKg;
 
-    @Column(name = "Quantity")
+    @Column(name = "Quantity", nullable = true)
     private int quantity;
 
-    @Column(name = "CreatedDate")
+    @Column(name = "CreatedDate", nullable = true)
     private Date createdDate;
+
+    @OneToMany(mappedBy = "productEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderDetailEntity> orderDetailEntities;
 }

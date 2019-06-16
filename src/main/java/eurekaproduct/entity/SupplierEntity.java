@@ -13,9 +13,16 @@ import javax.persistence.Table;
 @Table(name = "supplier")
 public class SupplierEntity extends BaseCommonEntity {
 
-    @Column(name = "Company")
+    @Column(name = "Company", nullable = true)
     private String company;
 
-    @Column(name = "Addess")
+    @Column(name = "Addess", nullable = true)
     private String address;
+
+    @Column(name = "City", nullable = true)
+    private String City;
+
+    @Column(name = "Phone", nullable = true)
+    private String phone;
+
 }
