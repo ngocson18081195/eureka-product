@@ -31,10 +31,10 @@ spring:
     url: jdbc:postgresql://ec2-54-83-201-84.compute-1.amazonaws.com:5432/dev9d14c7kiip4?sslmode=require&user=gqjbwvgtbcfthh&password=91fe711ea8e1eefbeaaf6dcee1d1ca7175eb1bf7887f547bcaa386b07a367a2f
     username: gqjbwvgtbcfthh
     password: 91fe711ea8e1eefbeaaf6dcee1d1ca7175eb1bf7887f547bcaa386b07a367a2f
-#  jpa:
-#    show-sql: true
-#    hibernate:
-#      ddl-auto: update
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
 #    properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
 
 

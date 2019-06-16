@@ -1,9 +1,12 @@
 package eurekaproduct.entity;
 
+import eurekaproduct.BaseEntity.BaseCommonEntity;
+import eurekaproduct.BaseEntity.BaseEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Create by ngocson on 18/05/2019
@@ -11,16 +14,23 @@ import javax.persistence.*;
 @Entity
 @Table(name = "product")
 @Data
-@NoArgsConstructor
-public class ProductEntity {
+public class ProductEntity extends BaseCommonEntity {
 
-    @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_seq_gen")
-//    @SequenceGenerator(name = "product_seq_gen", sequenceName = "product_id_seq")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "ProductCode")
+    private String code;
 
-    @Column(name = "productname")
-    private String productName;
+    @Column(name = "Price")
+    private double price;
+
+    @Column(name = "ImageUrl")
+    private String imageUrl;
+
+    @Column(name = "WeightKg")
+    private double weightKg;
+
+    @Column(name = "Quantity")
+    private int quantity;
+
+    @Column(name = "CreatedDate")
+    private Date createdDate;
 }
