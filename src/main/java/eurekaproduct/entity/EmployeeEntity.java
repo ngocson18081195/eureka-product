@@ -1,6 +1,6 @@
 package eurekaproduct.entity;
 
-import eurekaproduct.Base.BaseEntity.BaseCommonEntity;
+import eurekaproduct.base.entity.BaseCommonEntity;
 import lombok.Data;
 
 import javax.persistence.*;

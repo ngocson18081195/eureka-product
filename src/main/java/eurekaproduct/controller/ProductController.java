@@ -1,16 +1,13 @@
 package eurekaproduct.controller;
 
-import eurekaproduct.Base.BaseController.BaseController;
+import eurekaproduct.base.controller.BaseController;
 import eurekaproduct.entity.ProductEntity;
-import eurekaproduct.repository.productRepository;
+import eurekaproduct.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Create by ngocson on 29/04/2019
@@ -18,13 +15,13 @@ import java.util.List;
 @RefreshScope
 @RestController
 @RequestMapping(value = "/")
-public class productController extends BaseController {
+public class ProductController extends BaseController {
 
     @Value("${app.service-name}")
     private String serviceName;
 
     @Autowired
-    private productRepository productRepository;
+    private ProductRepository productRepository;
 
     @GetMapping(value = "/list")
     public ResponseEntity getAllList() {

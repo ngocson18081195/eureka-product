@@ -1,4 +1,4 @@
-package eurekaproduct.Base.BaseController;
+package eurekaproduct.base.controller;
 
 /**
  * Create by ngocson on 16/06/2019

@@ -1,8 +1,8 @@
 package eurekaproduct.service;
 
-import eurekaproduct.Base.BaseEntity.BaseEntity;
-import eurekaproduct.Base.BaseService.BaseService;
-import eurekaproduct.Base.BaseDTO.BaseCommonDTO;
+import eurekaproduct.base.entity.BaseEntity;
+import eurekaproduct.base.service.BaseService;
+import eurekaproduct.base.dto.BaseCommonDTO;
 import eurekaproduct.entity.ProductEntity;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * Create by ngocson on 16/06/2019
  */
 @Service
-public class productService extends BaseService {
+public class ProductService extends BaseService {
 
 
     @Override

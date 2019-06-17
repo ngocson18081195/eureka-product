@@ -1,4 +1,4 @@
-package eurekaproduct.Base.BaseEntity;
+package eurekaproduct.base.entity;
 
 import lombok.Data;
 

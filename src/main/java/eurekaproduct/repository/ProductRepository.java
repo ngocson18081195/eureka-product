@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
  * Create by ngocson on 18/05/2019
  */
 @Repository
-public interface productRepository extends CrudRepository<ProductEntity, Long> {
+public interface ProductRepository extends CrudRepository<ProductEntity, Long> {
 }

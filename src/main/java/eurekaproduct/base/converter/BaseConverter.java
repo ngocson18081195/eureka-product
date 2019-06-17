@@ -1,4 +1,4 @@
-package eurekaproduct.Base.BaseConverter;
+package eurekaproduct.base.converter;
 
 /**
  * Create by ngocson on 16/06/2019

@@ -1,7 +1,7 @@
-package eurekaproduct.Base.BaseService;
+package eurekaproduct.base.service;
 
-import eurekaproduct.Base.BaseEntity.BaseEntity;
-import eurekaproduct.Base.BaseDTO.BaseCommonDTO;
+import eurekaproduct.base.entity.BaseEntity;
+import eurekaproduct.base.dto.BaseCommonDTO;
 import lombok.extern.slf4j.Slf4j;
 
 /**

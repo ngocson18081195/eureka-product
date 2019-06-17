@@ -1,6 +1,6 @@
 package eurekaproduct.entity;
 
-import eurekaproduct.Base.BaseEntity.BaseCommonEntity;
+import eurekaproduct.base.entity.BaseCommonEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
