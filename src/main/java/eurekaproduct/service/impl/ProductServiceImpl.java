@@ -3,13 +3,19 @@ package eurekaproduct.service.impl;
 import eurekaproduct.base.entity.BaseEntity;
 import eurekaproduct.base.service.BaseService;
 import eurekaproduct.base.dto.BaseCommonDTO;
+import eurekaproduct.converter.ProductConverter;
 import eurekaproduct.dto.ProductDTO;
 import eurekaproduct.entity.ProductEntity;
+import eurekaproduct.exception.NotFoundException;
 import eurekaproduct.info.ProductInfo;
+import eurekaproduct.repository.ProductRepository;
 import eurekaproduct.service.ProductService;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,6 +24,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductServiceImpl extends BaseService implements ProductService {
 
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
+    private ProductConverter productConverter;
 
     @Override
     protected BaseEntity createNewEntity() {
@@ -39,12 +50,25 @@ public class ProductServiceImpl extends BaseService implements ProductService {
 
     @Override
     public List<ProductInfo> getAll() {
-        return null;
+        return this.productRepository.findAll().stream()
+            .map(ele -> {
+                ProductInfo productInfo = this.initialInfo();
+                this.productConverter.convertProductInfo(productInfo, ele);
+                return productInfo;
+            }).collect(Collectors.toList());
     }
 
     @Override
     public ProductDTO getOne(Long id) {
-        return null;
+        Optional<ProductEntity> optEntity = this.productRepository.findById(id);
+        if (optEntity.isPresent()) {
+            ProductEntity productEntity = optEntity.get();
+            ProductDTO productDTO = this.initialDto();
+            this.productConverter.convertProductDto(productDTO, productEntity);
+            return productDTO;
+        }
+        String message = String.format("Not found product with id [%s].", id);
+        throw new NotFoundException(message);
     }
 
     @Override
@@ -55,5 +79,13 @@ public class ProductServiceImpl extends BaseService implements ProductService {
     @Override
     public ProductDTO save(ProductDTO productDto) {
         return null;
+    }
+
+    private ProductInfo initialInfo() {
+        return new ProductInfo();
+    }
+
+    private ProductDTO initialDto() {
+        return new ProductDTO();
     }
 }
