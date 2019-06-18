@@ -1,11 +1,15 @@
 package eurekaproduct.common;
 
+import java.io.Serializable;
+
 import org.springframework.http.HttpStatus;
 
 import lombok.Data;
 
 @Data
-public class Response {
+public class Response implements Serializable {
+
+    private static final long serialVersionUID = -3597647861555521218L;
 
     private Object data;
 

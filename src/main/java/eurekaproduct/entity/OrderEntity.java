@@ -24,8 +24,8 @@ public class OrderEntity extends BaseCommonEntity {
     @Column(name = "TotalMoney", nullable = true)
     private double totalMoney;
 
-    @Column(name = "order")
-    private Integer order;
+    @Column(name = "orderNo")
+    private Integer orderNo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "EmployeeObjectRef")

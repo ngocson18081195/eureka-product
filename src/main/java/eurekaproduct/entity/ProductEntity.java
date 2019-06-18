@@ -1,11 +1,17 @@
 package eurekaproduct.entity;
 
-import eurekaproduct.base.entity.BaseCommonEntity;
-import lombok.Data;
+import eurekaproduct.base.entity.AuditingEntity;
 
-import javax.persistence.*;
-import java.util.Date;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import java.util.List;
+
+import lombok.Data;
 
 /**
  * Create by ngocson on 18/05/2019
@@ -13,25 +19,22 @@ import java.util.List;
 @Entity
 @Table(name = "product")
 @Data
-public class ProductEntity extends BaseCommonEntity {
+public class ProductEntity extends AuditingEntity {
 
-    @Column(name = "ProductCode", nullable = true)
+    @Column(name = "ProductCode")
     private String code;
 
-    @Column(name = "Price", nullable = true)
+    @Column(name = "Price")
     private double price;
 
-    @Column(name = "ImageUrl", nullable = true)
+    @Column(name = "ImageUrl")
     private String imageUrl;
 
-    @Column(name = "WeightKg", nullable = true)
+    @Column(name = "WeightKg")
     private double weightKg;
 
-    @Column(name = "Quantity", nullable = true)
+    @Column(name = "Quantity")
     private int quantity;
-
-    @Column(name = "CreatedDate", nullable = true)
-    private Date createdDate;
 
     @OneToMany(mappedBy = "productEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderDetailEntity> orderDetailEntities;

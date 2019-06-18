@@ -5,7 +5,6 @@ import eurekaproduct.base.controller.BaseController;
 import eurekaproduct.common.Response;
 import eurekaproduct.dto.ProductDTO;
 import eurekaproduct.entity.ProductEntity;
-import eurekaproduct.info.ProductInfo;
 import eurekaproduct.repository.ProductRepository;
 import eurekaproduct.service.ProductService;
 
@@ -69,8 +68,9 @@ public class ProductController extends BaseController {
     @GetMapping
     @Logging
     public Response getAll() {
-        List<ProductInfo> productInfoList = this.productService.getAll();
-        return Response.Builder.buildSuccess(productInfoList);
+        //        List<ProductInfo> productInfoList = this.productService.getAll();
+        List<ProductEntity> all = this.productRepository.findAll();
+        return Response.Builder.buildSuccess(all);
     }
 
     @PostMapping

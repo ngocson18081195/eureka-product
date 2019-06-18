@@ -16,13 +16,19 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LoggingAOP {
 
+    /**
+     * fixme --- implement log exception.
+     * @param proceedingJoinPoint
+     * @throws Throwable
+     */
     @Around("@annotation(eurekaproduct.annotation.Logging)")
-    public void log(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+    public Object log(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         JoinPoint.StaticPart staticPart = proceedingJoinPoint.getStaticPart();
         String args = Arrays.stream(proceedingJoinPoint.getArgs())
             .map(String::valueOf).collect(Collectors.joining(", "));
         log.info("{} with args [{}] --- START", staticPart, args);
-        proceedingJoinPoint.proceed();
+        Object result = proceedingJoinPoint.proceed();
         log.info("{} with args [{}] --- END", staticPart, args);
+        return result;
     }
 }

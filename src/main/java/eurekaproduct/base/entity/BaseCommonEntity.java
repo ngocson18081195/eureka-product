@@ -12,10 +12,10 @@ import javax.persistence.MappedSuperclass;
 @Data
 public class BaseCommonEntity extends BaseEntity {
 
-    @Column(name = "name", nullable = true)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "status", nullable = true)
+    @Column(name = "status")
     private String status;
 
 }
