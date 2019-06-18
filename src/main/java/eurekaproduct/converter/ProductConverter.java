@@ -19,4 +19,8 @@ public class ProductConverter {
     public void convertProductDto(ProductDTO destination, ProductEntity source) {
         // todo
     }
+
+    public void convertProductEntity(ProductEntity productEntity, ProductDTO productDto) {
+        // todo
+    }
 }

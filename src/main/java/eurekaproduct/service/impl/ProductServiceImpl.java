@@ -73,12 +73,22 @@ public class ProductServiceImpl extends BaseService implements ProductService {
 
     @Override
     public boolean delete(Long id) {
+        Optional<ProductEntity> optEntity = this.productRepository.findById(id);
+        if (optEntity.isPresent()) {
+            ProductEntity productEntity = optEntity.get();
+            this.productRepository.delete(productEntity);
+            return true;
+        }
         return false;
     }
 
     @Override
     public ProductDTO save(ProductDTO productDto) {
-        return null;
+        ProductEntity productEntity = this.initialEntity();
+        this.productConverter.convertProductEntity(productEntity, productDto);
+        this.productRepository.save(productEntity);
+        productDto.setId(productEntity.getId());
+        return productDto;
     }
 
     private ProductInfo initialInfo() {
@@ -87,5 +97,9 @@ public class ProductServiceImpl extends BaseService implements ProductService {
 
     private ProductDTO initialDto() {
         return new ProductDTO();
+    }
+
+    private ProductEntity initialEntity() {
+        return new ProductEntity();
     }
 }

@@ -1,3 +1,9 @@
 package eurekaproduct.dto;
 
-public class ProductDTO {}
+import lombok.Data;
+
+@Data
+public class ProductDTO {
+
+    private Long id;
+}

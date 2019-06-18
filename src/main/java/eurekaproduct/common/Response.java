@@ -2,6 +2,9 @@ package eurekaproduct.common;
 
 import org.springframework.http.HttpStatus;
 
+import lombok.Data;
+
+@Data
 public class Response {
 
     private Object data;
@@ -20,11 +23,11 @@ public class Response {
             return response;
         }
 
-        public static Response buildError(String message, HttpStatus httpStatus) {
+        public static Response buildInternalServerError(String message) {
             Response response = new Response();
             response.data = null;
             response.message = message;
-            response.httpStatus = httpStatus;
+            response.httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
             return response;
         }
     }
