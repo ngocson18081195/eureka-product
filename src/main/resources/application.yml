@@ -40,7 +40,6 @@ spring:
 
 
 
-
 #spring:
 #  cloud:
 #    zookeeper:
@@ -60,4 +59,10 @@ spring:
 
 #            zkNodes: localhost
 #            brokers: localhost
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
 #eureka.client.serviceUrl.defaultZone=http://localhost:8000/eureka/
