@@ -37,6 +37,12 @@ spring:
       ddl-auto: update
 #    properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
 
+unknown:
+  media:
+    url: /media/**
+    path: http://localhost:8081/media
+    folder-in: ./media
+    folder-out: file:./media/
 
 
 #spring:

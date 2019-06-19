@@ -126,7 +126,7 @@ public class ProductServiceImpl extends BaseService implements ProductService {
             throw new UnknownException(message);
         }
         // Handle file
-        String imgUrl = this.fileUtils.saveImage(img);
+        String imgUrl = this.fileUtils.saveImage(img, "product");
         dto.setImageUrl(imgUrl);
         // Handle entity
         ProductEntity entity = this.initialEntity();

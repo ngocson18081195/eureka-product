@@ -25,16 +25,16 @@ public class ProductEntity extends AuditingEntity {
     private String code;
 
     @Column(name = "Price")
-    private double price;
+    private Double price;
 
     @Column(name = "ImageUrl")
     private String imageUrl;
 
     @Column(name = "WeightKg")
-    private double weightKg;
+    private Double weightKg;
 
     @Column(name = "Quantity")
-    private int quantity;
+    private Integer quantity;
 
     @OneToMany(mappedBy = "productEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderDetailEntity> orderDetailEntities;
