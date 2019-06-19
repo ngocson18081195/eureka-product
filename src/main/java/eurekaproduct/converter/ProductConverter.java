@@ -17,10 +17,22 @@ public class ProductConverter {
     }
 
     public void convertProductDto(ProductDTO destination, ProductEntity source) {
-        // todo
+        destination.setId(source.getId());
+        destination.setName(source.getName());
+        destination.setCode(source.getCode());
+        destination.setImageUrl(source.getImageUrl());
+        destination.setPrice(source.getPrice());
+        destination.setQuantity(source.getQuantity());
+        destination.setWeightKg(source.getWeightKg());
     }
 
-    public void convertProductEntity(ProductEntity productEntity, ProductDTO productDto) {
-        // todo
+    public void convertProductEntity(ProductEntity destination, ProductDTO source) {
+        destination.setId(source.getId());
+        destination.setName(source.getName());
+        destination.setCode(source.getCode());
+        destination.setImageUrl(source.getImageUrl());
+        destination.setPrice(source.getPrice());
+        destination.setQuantity(source.getQuantity());
+        destination.setWeightKg(source.getWeightKg());
     }
 }

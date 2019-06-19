@@ -3,20 +3,26 @@ package eurekaproduct.service.impl;
 import eurekaproduct.base.entity.BaseEntity;
 import eurekaproduct.base.service.BaseService;
 import eurekaproduct.base.dto.BaseCommonDTO;
+import eurekaproduct.common.FileUtils;
 import eurekaproduct.converter.ProductConverter;
 import eurekaproduct.dto.ProductDTO;
 import eurekaproduct.entity.ProductEntity;
-import eurekaproduct.exception.NotFoundException;
+import eurekaproduct.exception.UnknownException;
 import eurekaproduct.info.ProductInfo;
 import eurekaproduct.repository.ProductRepository;
 import eurekaproduct.service.ProductService;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Create by ngocson on 16/06/2019
@@ -29,6 +35,12 @@ public class ProductServiceImpl extends BaseService implements ProductService {
 
     @Autowired
     private ProductConverter productConverter;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @Autowired
+    private FileUtils fileUtils;
 
     @Override
     protected BaseEntity createNewEntity() {
@@ -67,8 +79,8 @@ public class ProductServiceImpl extends BaseService implements ProductService {
             this.productConverter.convertProductDto(productDTO, productEntity);
             return productDTO;
         }
-        String message = String.format("Not found product with id [%s].", id);
-        throw new NotFoundException(message);
+        String messageNotFound = String.format("Not found product with id [%s].", id);
+        throw new UnknownException(messageNotFound);
     }
 
     @Override
@@ -83,17 +95,45 @@ public class ProductServiceImpl extends BaseService implements ProductService {
     }
 
     @Override
-    public ProductDTO save(ProductDTO productDto) {
-        Long id = productDto.getId();
-        Optional<ProductEntity> optEntity = this.productRepository.findById(id);
-        ProductEntity productEntity = this.initialEntity();
-        if (optEntity.isPresent()) {
-            productEntity = optEntity.get();
+    public ProductDTO update(MultipartFile img, Map<String, String> data) {
+        ProductDTO productDTO = this.objectMapper.convertValue(data, ProductDTO.class);
+        // Verification
+        Long id = productDTO.getId();
+        if (Objects.isNull(id)) {
+            String message = "Object's id is undefined";
+            throw new UnknownException(message);
         }
-        this.productConverter.convertProductEntity(productEntity, productDto);
-        this.productRepository.save(productEntity);
-        productDto.setId(productEntity.getId());
-        return productDto;
+        // Handle entity
+        Optional<ProductEntity> optEntity = this.productRepository.findById(id);
+        if (optEntity.isPresent()) {
+            ProductEntity productEntity = optEntity.get();
+            // handle file
+            // update
+            this.productConverter.convertProductEntity(productEntity, productDTO);
+            this.productRepository.save(productEntity);
+            return productDTO;
+        }
+        String messageNotFound = String.format("Not found product with id [%s].", id);
+        throw new UnknownException(messageNotFound);
+    }
+
+    @Override
+    public ProductDTO create(MultipartFile img, Map<String, String> data) {
+        ProductDTO dto = this.objectMapper.convertValue(data, ProductDTO.class);
+        // Verification
+        if (Objects.nonNull(dto.getId())) {
+            String message = "New object mustn't include id";
+            throw new UnknownException(message);
+        }
+        // Handle file
+        String imgUrl = this.fileUtils.saveImage(img);
+        dto.setImageUrl(imgUrl);
+        // Handle entity
+        ProductEntity entity = this.initialEntity();
+        this.productConverter.convertProductEntity(entity, dto);
+        this.productRepository.save(entity);
+        dto.setId(entity.getId());
+        return dto;
     }
 
     private ProductInfo initialInfo() {

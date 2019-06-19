@@ -4,6 +4,9 @@ import eurekaproduct.dto.ProductDTO;
 import eurekaproduct.info.ProductInfo;
 
 import java.util.List;
+import java.util.Map;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public interface ProductService {
 
@@ -13,5 +16,7 @@ public interface ProductService {
 
     boolean delete(Long id);
 
-    ProductDTO save(ProductDTO productDto);
+    ProductDTO update(MultipartFile img, Map<String, String> data);
+
+    ProductDTO create(MultipartFile img, Map<String, String> data);
 }

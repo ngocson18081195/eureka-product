@@ -1,15 +1,18 @@
 package eurekaproduct.common;
 
-import eurekaproduct.exception.NotFoundException;
+import eurekaproduct.exception.UnknownException;
 
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
 
 public class BaseControllerAdvice {
 
-    @ExceptionHandler({ NotFoundException.class })
-    public final Response handleException(Exception ex, WebRequest request) {
-        // fixme --- Temporary implement
+    @ExceptionHandler({UnknownException.class})
+    public final Response handleException(Exception ex) {
+        // fixme --- implement temporarily
+        if (ex instanceof UnknownException) {
+            UnknownException nfe = (UnknownException) ex;
+            return Response.Builder.buildInternalServerError(nfe.getMessage());
+        }
         return Response.Builder.buildInternalServerError(ex.getMessage());
     }
 }
