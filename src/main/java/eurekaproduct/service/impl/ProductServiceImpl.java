@@ -84,7 +84,12 @@ public class ProductServiceImpl extends BaseService implements ProductService {
 
     @Override
     public ProductDTO save(ProductDTO productDto) {
+        Long id = productDto.getId();
+        Optional<ProductEntity> optEntity = this.productRepository.findById(id);
         ProductEntity productEntity = this.initialEntity();
+        if (optEntity.isPresent()) {
+            productEntity = optEntity.get();
+        }
         this.productConverter.convertProductEntity(productEntity, productDto);
         this.productRepository.save(productEntity);
         productDto.setId(productEntity.getId());

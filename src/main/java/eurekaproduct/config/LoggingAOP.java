@@ -22,13 +22,19 @@ public class LoggingAOP {
      * @throws Throwable
      */
     @Around("@annotation(eurekaproduct.annotation.Logging)")
-    public Object log(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+    public Object log(ProceedingJoinPoint proceedingJoinPoint) {
         JoinPoint.StaticPart staticPart = proceedingJoinPoint.getStaticPart();
         String args = Arrays.stream(proceedingJoinPoint.getArgs())
             .map(String::valueOf).collect(Collectors.joining(", "));
-        log.info("{} with args [{}] --- START", staticPart, args);
-        Object result = proceedingJoinPoint.proceed();
-        log.info("{} with args [{}] --- END", staticPart, args);
+        Object result = null;
+        try {
+            log.info("{} with args [{}] --- START", staticPart, args);
+            result = proceedingJoinPoint.proceed();
+            log.info("{} with args [{}] --- END", staticPart, args);
+        } catch (Throwable throwable) {
+            log.error("{} with args [{}] error [{}] --- ERROR", staticPart, args, throwable.getMessage());
+            throwable.printStackTrace();
+        }
         return result;
     }
 }
