@@ -96,9 +96,9 @@ public class ProductServiceImpl extends BaseService implements ProductService {
 
     @Override
     public ProductDTO update(MultipartFile img, Map<String, String> data) {
-        ProductDTO productDTO = this.objectMapper.convertValue(data, ProductDTO.class);
+        ProductDTO dto = this.objectMapper.convertValue(data, ProductDTO.class);
         // Verification
-        Long id = productDTO.getId();
+        Long id = dto.getId();
         if (Objects.isNull(id)) {
             String message = "Object's id is undefined";
             throw new UnknownException(message);
@@ -106,12 +106,14 @@ public class ProductServiceImpl extends BaseService implements ProductService {
         // Handle entity
         Optional<ProductEntity> optEntity = this.productRepository.findById(id);
         if (optEntity.isPresent()) {
-            ProductEntity productEntity = optEntity.get();
+            ProductEntity entity = optEntity.get();
             // handle file
+            String imgUrl = this.fileUtils.saveImage(img, "product");
+            dto.setImageUrl(imgUrl);
             // update
-            this.productConverter.convertProductEntity(productEntity, productDTO);
-            this.productRepository.save(productEntity);
-            return productDTO;
+            this.productConverter.convertProductEntity(entity, dto);
+            this.productRepository.save(entity);
+            return dto;
         }
         String messageNotFound = String.format("Not found product with id [%s].", id);
         throw new UnknownException(messageNotFound);
