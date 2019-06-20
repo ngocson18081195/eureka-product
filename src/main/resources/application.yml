@@ -44,7 +44,6 @@ unknown:
     folder-in: ./media
     folder-out: file:./media/
 
-
 #spring:
 #  cloud:
 #    zookeeper:
@@ -64,6 +63,7 @@ unknown:
 
 #            zkNodes: localhost
 #            brokers: localhost
+
 management:
   endpoints:
     web:
