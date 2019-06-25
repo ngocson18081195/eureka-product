@@ -12,6 +12,7 @@ public class ProductConverter {
     public void convertProductInfo(ProductInfo destination, ProductEntity source) {
         destination.setId(source.getId());
         destination.setName(source.getName());
+        destination.setCode(source.getCode());
         destination.setPrice(source.getPrice());
         destination.setImageUrl(source.getImageUrl());
     }

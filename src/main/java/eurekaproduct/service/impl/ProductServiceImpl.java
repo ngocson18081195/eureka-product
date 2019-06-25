@@ -127,6 +127,10 @@ public class ProductServiceImpl extends BaseService implements ProductService {
             String message = "New object mustn't include id";
             throw new UnknownException(message);
         }
+        if (this.productRepository.existsByCode(dto.getCode())) {
+            String message = String.format("Product's code [%s] must be unique.", dto.getCode());
+            throw new UnknownException(message);
+        }
         // Handle file
         String imgUrl = this.fileUtils.saveImage(img, "product");
         dto.setImageUrl(imgUrl);
