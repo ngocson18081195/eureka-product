@@ -49,13 +49,6 @@ public class ProductController extends BaseController {
         productEntity.setName("Son");
         return ResponseEntity.ok(productRepository.save(productEntity));
     }
-    //
-    //    @GetMapping(value = "/{productId}")
-    //    public ResponseEntity findProduct(@PathVariable Long productId) {
-    //        return ResponseEntity.ok(productDTOS.stream().filter(
-    //                ProductDTO -> ProductDTO.getId().equals(productId))
-    //        .findFirst().orElse(null));
-    //    }
 
     @GetMapping("/service")
     public String getServiceName() {

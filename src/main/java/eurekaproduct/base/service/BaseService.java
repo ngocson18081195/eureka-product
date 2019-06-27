@@ -3,16 +3,18 @@ package eurekaproduct.base.service;
 import com.google.common.collect.Lists;
 import eurekaproduct.base.entity.BaseEntity;
 import eurekaproduct.base.dto.BaseCommonDTO;
+import eurekaproduct.exception.UnknownException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Create by ngocson on 16/06/2019
  */
 @Slf4j
 public abstract class BaseService<O extends BaseCommonDTO, E extends BaseEntity,
-        I extends BaseCommonDTO> implements BaseServiceCommon<I> {
+        I extends BaseCommonDTO> implements BaseServiceCommon<I, O> {
 
     @Override
     public List<I> getAll(String condition) {
@@ -21,6 +23,29 @@ public abstract class BaseService<O extends BaseCommonDTO, E extends BaseEntity,
         searchResult = this.findAll(condition);
         log.info("Search list - END, search condition=[{}]", condition);
         return searchResult;
+    }
+
+    @Override
+    public O getOne(Long id) {
+        Optional<E> opEntity = this.findOneObject(id);
+        if (opEntity.isPresent()) {
+            E entity = opEntity.get();
+            O dto = this.convertToDTO(entity);
+            return dto;
+        }
+        String messageNotFound = String.format("Not found item with id [%s].", id);
+        throw new UnknownException(messageNotFound);
+    }
+
+    @Override
+    public boolean delete(Long id) {
+        Optional<E> opEntity = this.findOneObject(id);
+        if (opEntity.isPresent()) {
+            E entity = opEntity.get();
+            this.deleteEntity(entity);
+            return true;
+        }
+        return false;
     }
 
     public O create(O dto) {
@@ -34,14 +59,16 @@ public abstract class BaseService<O extends BaseCommonDTO, E extends BaseEntity,
         return createDto;
     }
 
+    protected abstract void deleteEntity(E entity);
+
+    protected abstract O createNewDto();
+
+    protected abstract Optional<E> findOneObject(Long id);
+
     protected abstract List<I> findAll(String condition);
 
     private O edit(O dto) {
         return null;
-    }
-
-    private boolean delete(Long id) {
-        return true;
     }
 
     protected abstract E createNewEntity();

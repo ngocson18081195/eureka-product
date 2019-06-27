@@ -9,11 +9,7 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public interface ProductService extends BaseServiceCommon<ProductInfo> {
-
-    ProductDTO getOne(Long id);
-
-    boolean delete(Long id);
+public interface ProductService extends BaseServiceCommon<ProductInfo, ProductDTO> {
 
     ProductDTO update(MultipartFile img, Map<String, String> data);
 

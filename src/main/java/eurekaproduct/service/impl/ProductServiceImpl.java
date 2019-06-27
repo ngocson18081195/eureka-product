@@ -40,16 +40,13 @@ public class ProductServiceImpl extends BaseService<ProductDTO, ProductEntity,
     private FileUtils fileUtils;
 
     @Override
-    public ProductDTO getOne(Long id) {
-        Optional<ProductEntity> optEntity = this.productRepository.findById(id);
-        if (optEntity.isPresent()) {
-            ProductEntity productEntity = optEntity.get();
-            ProductDTO productDTO = this.initialDto();
-            this.productConverter.convertProductDto(productDTO, productEntity);
-            return productDTO;
-        }
-        String messageNotFound = String.format("Not found product with id [%s].", id);
-        throw new UnknownException(messageNotFound);
+    protected ProductDTO createNewDto() {
+        return new ProductDTO();
+    }
+
+    @Override
+    protected Optional<ProductEntity> findOneObject(Long id) {
+        return this.productRepository.findById(id);
     }
 
     @Override
@@ -63,14 +60,8 @@ public class ProductServiceImpl extends BaseService<ProductDTO, ProductEntity,
     }
 
     @Override
-    public boolean delete(Long id) {
-        Optional<ProductEntity> optEntity = this.productRepository.findById(id);
-        if (optEntity.isPresent()) {
-            ProductEntity productEntity = optEntity.get();
-            this.productRepository.delete(productEntity);
-            return true;
-        }
-        return false;
+    protected void deleteEntity(ProductEntity productEntity) {
+        this.productRepository.delete(productEntity);
     }
 
     @Override
@@ -131,7 +122,7 @@ public class ProductServiceImpl extends BaseService<ProductDTO, ProductEntity,
         String imgUrl = this.fileUtils.saveImage(img, "product");
         dto.setImageUrl(imgUrl);
         // Handle entity
-        ProductEntity entity = this.initialEntity();
+        ProductEntity entity = this.createNewEntity();
         this.productConverter.convertProductEntity(entity, dto);
         this.productRepository.save(entity);
         dto.setId(entity.getId());
@@ -146,7 +137,4 @@ public class ProductServiceImpl extends BaseService<ProductDTO, ProductEntity,
         return new ProductDTO();
     }
 
-    private ProductEntity initialEntity() {
-        return new ProductEntity();
-    }
 }
