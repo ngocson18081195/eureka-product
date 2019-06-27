@@ -78,7 +78,9 @@ public class ProductServiceImpl extends BaseService<ProductDTO, ProductEntity,
 
     @Override
     protected ProductDTO convertToDTO(ProductEntity newEntity) {
-        return null;
+        ProductDTO productDTO = this.initialDto();
+        this.productConverter.convertProductDto(productDTO, newEntity);
+        return productDTO;
     }
 
     @Override
