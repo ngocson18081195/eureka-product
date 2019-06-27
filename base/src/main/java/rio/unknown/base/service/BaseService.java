@@ -1,8 +1,8 @@
-package rio.unknown.management.base.service;
+package rio.unknown.base.service;
 
-import rio.unknown.management.base.dto.BaseCommonDTO;
-import rio.unknown.management.base.entity.BaseEntity;
-import rio.unknown.management.exception.UnknownException;
+import rio.unknown.base.dto.BaseCommonDTO;
+import rio.unknown.base.entity.BaseEntity;
+import rio.unknown.exception.UnknownException;
 
 import java.util.List;
 import java.util.Optional;

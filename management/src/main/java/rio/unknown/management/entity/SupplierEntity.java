@@ -1,6 +1,6 @@
 package rio.unknown.management.entity;
 
-import rio.unknown.management.base.entity.BaseCommonEntity;
+import rio.unknown.base.entity.BaseCommonEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

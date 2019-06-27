@@ -1,11 +1,11 @@
 package rio.unknown.management.service.impl;
 
-import rio.unknown.management.base.service.BaseService;
-import rio.unknown.management.common.FileUtils;
+import rio.unknown.base.service.BaseService;
+import rio.unknown.common.FileUtils;
 import rio.unknown.management.converter.ProductConverter;
 import rio.unknown.management.dto.ProductDTO;
 import rio.unknown.management.entity.ProductEntity;
-import rio.unknown.management.exception.UnknownException;
+import rio.unknown.exception.UnknownException;
 import rio.unknown.management.info.ProductInfo;
 import rio.unknown.management.repository.ProductRepository;
 import rio.unknown.management.service.ProductService;

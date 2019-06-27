@@ -1,6 +1,6 @@
-package rio.unknown.management.common;
+package rio.unknown.common;
 
-import rio.unknown.management.exception.UnknownException;
+import rio.unknown.exception.UnknownException;
 
 import org.springframework.web.bind.annotation.ExceptionHandler;
 

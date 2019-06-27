@@ -1,6 +1,6 @@
 package rio.unknown.management.dto;
 
-import rio.unknown.management.base.dto.BaseCommonDTO;
+import rio.unknown.base.dto.BaseCommonDTO;
 
 import lombok.Data;
 

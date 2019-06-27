@@ -1,4 +1,4 @@
-package rio.unknown.management.base.entity;
+package rio.unknown.base.entity;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;

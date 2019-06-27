@@ -1,4 +1,4 @@
-package rio.unknown.management.config;
+package rio.unknown.config;
 
 import java.util.Optional;
 

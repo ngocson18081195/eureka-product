@@ -1,4 +1,4 @@
-package rio.unknown.management.base.dto;
+package rio.unknown.base.dto;
 
 import lombok.Data;
 

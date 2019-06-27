@@ -1,4 +1,4 @@
-package rio.unknown.management.base.controller;
+package rio.unknown.base.controller;
 
 /**
  * Create by ngocson on 16/06/2019

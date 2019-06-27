@@ -1,6 +1,6 @@
 package rio.unknown.management.service;
 
-import rio.unknown.management.base.service.BaseServiceCommon;
+import rio.unknown.base.service.BaseServiceCommon;
 import rio.unknown.management.dto.ProductDTO;
 import rio.unknown.management.info.ProductInfo;
 

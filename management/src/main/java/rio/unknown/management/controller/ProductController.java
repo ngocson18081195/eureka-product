@@ -1,8 +1,8 @@
 package rio.unknown.management.controller;
 
-import rio.unknown.management.annotation.Logging;
-import rio.unknown.management.base.controller.BaseController;
-import rio.unknown.management.common.Response;
+import rio.unknown.annotation.Logging;
+import rio.unknown.base.controller.BaseController;
+import rio.unknown.common.Response;
 import rio.unknown.management.dto.ProductDTO;
 import rio.unknown.management.entity.ProductEntity;
 import rio.unknown.management.info.ProductInfo;

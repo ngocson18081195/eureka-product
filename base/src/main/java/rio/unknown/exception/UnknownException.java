@@ -1,4 +1,4 @@
-package rio.unknown.management.exception;
+package rio.unknown.exception;
 
 import lombok.Getter;
 

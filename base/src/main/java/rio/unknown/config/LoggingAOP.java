@@ -1,4 +1,4 @@
-package rio.unknown.management.config;
+package rio.unknown.config;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -21,7 +21,7 @@ public class LoggingAOP {
      * @param proceedingJoinPoint
      * @throws Throwable
      */
-    @Around("@annotation(rio.unknown.management.annotation.Logging)")
+    @Around("@annotation(rio.unknown.annotation.Logging)")
     public Object log(ProceedingJoinPoint proceedingJoinPoint) {
         JoinPoint.StaticPart staticPart = proceedingJoinPoint.getStaticPart();
         String args = Arrays.stream(proceedingJoinPoint.getArgs())

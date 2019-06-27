@@ -1,4 +1,4 @@
-package rio.unknown.management.common;
+package rio.unknown.common;
 
 import java.io.Serializable;
 

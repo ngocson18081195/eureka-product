@@ -1,6 +1,6 @@
-package rio.unknown.management.base.service;
+package rio.unknown.base.service;
 
-import rio.unknown.management.base.dto.BaseCommonDTO;
+import rio.unknown.base.dto.BaseCommonDTO;
 
 import java.util.List;
 

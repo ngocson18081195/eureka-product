@@ -1,6 +1,6 @@
 package rio.unknown.management.entity;
 
-import rio.unknown.management.base.entity.AuditingEntity;
+import rio.unknown.base.entity.AuditingEntity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
