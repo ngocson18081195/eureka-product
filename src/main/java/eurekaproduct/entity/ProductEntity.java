@@ -21,19 +21,19 @@ import lombok.Data;
 @Data
 public class ProductEntity extends AuditingEntity {
 
-    @Column(name = "ProductCode")
+    @Column(name = "ProductCode", unique = true, nullable = false)
     private String code;
 
-    @Column(name = "Price")
+    @Column(name = "Price", nullable = false)
     private Double price;
 
     @Column(name = "ImageUrl")
     private String imageUrl;
 
-    @Column(name = "WeightKg")
+    @Column(name = "WeightKg", nullable = false)
     private Double weightKg;
 
-    @Column(name = "Quantity")
+    @Column(name = "Quantity", nullable = false)
     private Integer quantity;
 
     @OneToMany(mappedBy = "productEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
