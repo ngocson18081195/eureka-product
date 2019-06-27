@@ -1,12 +1,11 @@
 package eurekaproduct.dto;
 
+import eurekaproduct.base.dto.BaseCommonDTO;
 import lombok.Data;
 
 @Data
-public class ProductDTO {
+public class ProductDTO extends BaseCommonDTO {
 
-    private Long id;
-    private String name;
     private String imageUrl;
     private String code;
     private Double price;

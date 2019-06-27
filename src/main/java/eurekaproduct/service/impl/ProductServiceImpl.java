@@ -1,8 +1,7 @@
 package eurekaproduct.service.impl;
 
-import eurekaproduct.base.entity.BaseEntity;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import eurekaproduct.base.service.BaseService;
-import eurekaproduct.base.dto.BaseCommonDTO;
 import eurekaproduct.common.FileUtils;
 import eurekaproduct.converter.ProductConverter;
 import eurekaproduct.dto.ProductDTO;
@@ -11,6 +10,9 @@ import eurekaproduct.exception.UnknownException;
 import eurekaproduct.info.ProductInfo;
 import eurekaproduct.repository.ProductRepository;
 import eurekaproduct.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -18,17 +20,12 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
 /**
  * Create by ngocson on 16/06/2019
  */
 @Service
-public class ProductServiceImpl extends BaseService implements ProductService {
+public class ProductServiceImpl extends BaseService<ProductDTO, ProductEntity,
+        ProductInfo> implements ProductService {
 
     @Autowired
     private ProductRepository productRepository;
@@ -41,34 +38,6 @@ public class ProductServiceImpl extends BaseService implements ProductService {
 
     @Autowired
     private FileUtils fileUtils;
-
-    @Override
-    protected BaseEntity createNewEntity() {
-        ProductEntity newProductEntity = new ProductEntity();
-        // TO-do implement
-        return newProductEntity;
-    }
-
-    @Override
-    protected BaseEntity findByName(String name) {
-        return null;
-    }
-
-    @Override
-    protected BaseCommonDTO convertToDTO(BaseEntity newEntity) {
-        // TO-do
-        return null;
-    }
-
-    @Override
-    public List<ProductInfo> getAll() {
-        return this.productRepository.findAll().stream()
-            .map(ele -> {
-                ProductInfo productInfo = this.initialInfo();
-                this.productConverter.convertProductInfo(productInfo, ele);
-                return productInfo;
-            }).collect(Collectors.toList());
-    }
 
     @Override
     public ProductDTO getOne(Long id) {
@@ -84,6 +53,16 @@ public class ProductServiceImpl extends BaseService implements ProductService {
     }
 
     @Override
+    protected List<ProductInfo> findAll(String condition) {
+        return this.productRepository.findAll().stream()
+                .map(ele -> {
+                    ProductInfo productInfo = this.initialInfo();
+                    this.productConverter.convertProductInfo(productInfo, ele);
+                    return productInfo;
+                }).collect(Collectors.toList());
+    }
+
+    @Override
     public boolean delete(Long id) {
         Optional<ProductEntity> optEntity = this.productRepository.findById(id);
         if (optEntity.isPresent()) {
@@ -92,6 +71,23 @@ public class ProductServiceImpl extends BaseService implements ProductService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    protected ProductEntity createNewEntity() {
+        ProductEntity productEntity = new ProductEntity();
+        // Implement
+        return productEntity;
+    }
+
+    @Override
+    protected ProductEntity findByName(String name) {
+        return null;
+    }
+
+    @Override
+    protected ProductDTO convertToDTO(ProductEntity newEntity) {
+        return null;
     }
 
     @Override

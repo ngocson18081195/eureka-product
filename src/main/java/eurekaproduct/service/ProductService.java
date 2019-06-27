@@ -1,5 +1,6 @@
 package eurekaproduct.service;
 
+import eurekaproduct.base.service.BaseServiceCommon;
 import eurekaproduct.dto.ProductDTO;
 import eurekaproduct.info.ProductInfo;
 
@@ -8,9 +9,7 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public interface ProductService {
-
-    List<ProductInfo> getAll();
+public interface ProductService extends BaseServiceCommon<ProductInfo> {
 
     ProductDTO getOne(Long id);
 
