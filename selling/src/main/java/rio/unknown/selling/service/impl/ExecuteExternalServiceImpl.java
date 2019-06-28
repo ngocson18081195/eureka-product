@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ExecuteExternalServiceImpl implements ExecuteExternalService {
 
     /**
-     * Read take note 1.
+     * Read take note `1` in file `README.md` root.
      */
 
     // fixme --- Temporary implement
@@ -33,9 +33,8 @@ public class ExecuteExternalServiceImpl implements ExecuteExternalService {
 
     @Override
     public <T> List<T> getCollectionOrEmpty(String host, String url, Class<T> tClass) {
-        // fixme --- Temporary implement
         String urlRequest = host.concat(url);
-        // be able occurred exception
+        // fixme --- be able occurred exception
         Response response = restTemplate.getForObject(urlRequest, Response.class);
         if (Objects.nonNull(response)) {
             CollectionType collectionType = objectMapper.getTypeFactory().constructCollectionType(List.class, tClass);
@@ -43,5 +42,16 @@ public class ExecuteExternalServiceImpl implements ExecuteExternalService {
         }
 
         return Collections.emptyList();
+    }
+
+    @Override
+    public <T> T getOneOrNull(String host, String url, Class<T> tClass) {
+        String urlRequest = host.concat(url);
+        // fixme --- be able occurred exception
+        Response response = restTemplate.getForObject(urlRequest, Response.class);
+        if (Objects.nonNull(response)) {
+            return objectMapper.convertValue(response.getData(), tClass);
+        }
+        return null;
     }
 }
