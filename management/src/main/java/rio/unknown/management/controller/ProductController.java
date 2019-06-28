@@ -65,7 +65,7 @@ public class ProductController extends BaseController {
 
     @GetMapping
     @Logging
-    public Response getAll(@RequestBody String condition) {
+    public Response getAll(@RequestParam(required = false) String condition) {
         List<ProductInfo> productInfoList = this.productService.getAll(condition);
         return Response.Builder.buildSuccess(productInfoList);
     }

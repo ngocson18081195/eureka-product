@@ -11,5 +11,12 @@ management:
       exposure:
         include: '*'
 
+unknown:
+  media:
+    url: /media/**
+    path: http://localhost:8081/media
+    folder-in: ./media
+    folder-out: file:./media/
+
 server:
   port: 8082
