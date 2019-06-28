@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FileUtils {
 
-    private static final Character SEPERATE = '/';
+    private static final Character SEPARATE = '/';
     @Value("${unknown.media.folder-in}")
     private String directory;
     @Value("${unknown.media.path}")
@@ -29,11 +29,11 @@ public class FileUtils {
 
     public String saveImage(MultipartFile img, String category) {
         String imgName = System.currentTimeMillis() + "-" + img.getOriginalFilename();
-        String imgPath = Strings.join(Arrays.asList("", category, imgName), FileUtils.SEPERATE);
+        String imgPath = Strings.join(Arrays.asList("", category, imgName), FileUtils.SEPARATE);
         String imgLocation = this.directory + imgPath;
         try {
             Path path = Paths.get(imgLocation);
-            if (Files.notExists(path)) {
+            if (!path.toFile().exists()) {
                 Files.createDirectories(path.getParent());
             }
             @Cleanup InputStream inputStream = img.getInputStream();
