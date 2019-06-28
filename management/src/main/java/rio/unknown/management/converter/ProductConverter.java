@@ -2,7 +2,7 @@ package rio.unknown.management.converter;
 
 import rio.unknown.management.dto.ProductDTO;
 import rio.unknown.management.entity.ProductEntity;
-import rio.unknown.management.info.ProductInfo;
+import rio.unknown.info.ProductInfo;
 
 import org.springframework.stereotype.Component;
 

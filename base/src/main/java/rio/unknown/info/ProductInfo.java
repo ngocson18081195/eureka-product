@@ -1,4 +1,4 @@
-package rio.unknown.management.info;
+package rio.unknown.info;
 
 import rio.unknown.base.dto.BaseCommonDTO;
 

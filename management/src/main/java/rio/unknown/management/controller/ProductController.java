@@ -5,7 +5,7 @@ import rio.unknown.base.controller.BaseController;
 import rio.unknown.common.Response;
 import rio.unknown.management.dto.ProductDTO;
 import rio.unknown.management.entity.ProductEntity;
-import rio.unknown.management.info.ProductInfo;
+import rio.unknown.info.ProductInfo;
 import rio.unknown.management.repository.ProductRepository;
 import rio.unknown.management.service.ProductService;
 

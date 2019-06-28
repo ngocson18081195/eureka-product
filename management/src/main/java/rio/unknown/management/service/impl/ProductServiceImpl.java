@@ -2,11 +2,11 @@ package rio.unknown.management.service.impl;
 
 import rio.unknown.base.service.BaseService;
 import rio.unknown.common.FileUtils;
+import rio.unknown.exception.UnknownException;
+import rio.unknown.info.ProductInfo;
 import rio.unknown.management.converter.ProductConverter;
 import rio.unknown.management.dto.ProductDTO;
 import rio.unknown.management.entity.ProductEntity;
-import rio.unknown.exception.UnknownException;
-import rio.unknown.management.info.ProductInfo;
 import rio.unknown.management.repository.ProductRepository;
 import rio.unknown.management.service.ProductService;
 
@@ -26,8 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
  * Create by ngocson on 16/06/2019
  */
 @Service
-public class ProductServiceImpl extends BaseService<ProductDTO, ProductEntity,
-        ProductInfo> implements ProductService {
+public class ProductServiceImpl extends BaseService<ProductDTO, ProductEntity, ProductInfo> implements ProductService {
 
     @Autowired
     private ProductRepository productRepository;
@@ -53,12 +52,11 @@ public class ProductServiceImpl extends BaseService<ProductDTO, ProductEntity,
 
     @Override
     protected List<ProductInfo> findAll(String condition) {
-        return this.productRepository.findAll().stream()
-                .map(ele -> {
-                    ProductInfo productInfo = this.initialInfo();
-                    this.productConverter.convertProductInfo(productInfo, ele);
-                    return productInfo;
-                }).collect(Collectors.toList());
+        return this.productRepository.findAll().stream().map(ele -> {
+            ProductInfo productInfo = this.initialInfo();
+            this.productConverter.convertProductInfo(productInfo, ele);
+            return productInfo;
+        }).collect(Collectors.toList());
     }
 
     @Override
