@@ -45,8 +45,8 @@ public class ExecuteExternalServiceImpl implements ExecuteExternalService {
     }
 
     @Override
-    public <T> T getOneOrNull(String host, String url, Class<T> tClass) {
-        String urlRequest = host.concat(url);
+    public <T> T getOneOrNull(String host, String url, String uniqueID, Class<T> tClass) {
+        String urlRequest = host.concat(url).concat("/").concat(uniqueID);
         // fixme --- be able occurred exception
         Response response = restTemplate.getForObject(urlRequest, Response.class);
         if (Objects.nonNull(response)) {

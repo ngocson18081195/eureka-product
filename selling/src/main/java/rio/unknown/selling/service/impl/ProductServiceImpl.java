@@ -17,6 +17,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductInfo> getAll() {
+        // fixme --- temporary
         String host = "http://localhost:8081";
         String url = "/products";
         return this.executeExternalService.getCollectionOrEmpty(host, url, ProductInfo.class);
