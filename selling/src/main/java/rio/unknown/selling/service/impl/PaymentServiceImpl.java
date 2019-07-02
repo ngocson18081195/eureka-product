@@ -18,7 +18,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public void pay(PaymentDTO paymentDTO) {
-        
+
     }
 
     @Override
