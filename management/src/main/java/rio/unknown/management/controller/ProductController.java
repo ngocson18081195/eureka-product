@@ -71,14 +71,14 @@ public class ProductController extends BaseController {
 
     @PostMapping
     @Logging
-    public Response create(@RequestParam("img") MultipartFile img, @RequestParam Map<String, String> data) {
+    public Response create(@RequestParam(value = "img", required = false) MultipartFile img, @RequestParam Map<String, String> data) {
         ProductDTO result = this.productService.create(img, data);
         return Response.Builder.buildSuccess(result);
     }
 
     @PutMapping
     @Logging
-    public Response update(@RequestParam("img") MultipartFile img, @RequestParam Map<String, String> data) {
+    public Response update(@RequestParam(value = "img", required = false) MultipartFile img, @RequestParam Map<String, String> data) {
         ProductDTO result = this.productService.update(img, data);
         return Response.Builder.buildSuccess(result);
     }
