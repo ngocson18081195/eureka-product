@@ -69,5 +69,3 @@ management:
     web:
       exposure:
         include: '*'
-
-#eureka.client.serviceUrl.defaultZone=http://localhost:8000/eureka/
