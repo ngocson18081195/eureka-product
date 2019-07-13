@@ -18,9 +18,12 @@ public class SimpleCORSFilter implements Filter {
     private final Logger log = LoggerFactory.getLogger(SimpleCORSFilter.class);
 
 
+    public SimpleCORSFilter() {
+        log.info("SimpleCORSFilter init");
+    }
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        log.info("SimpleCORSFilter init");
     }
 
     @Override
