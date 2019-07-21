@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: rio.unknown.management.ManagementApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 82.23 s - in rio.unknown.management.ManagementApplicationTests

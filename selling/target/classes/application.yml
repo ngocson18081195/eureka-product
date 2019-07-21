@@ -1,0 +1,22 @@
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: https://floating-eyrie-61261.herokuapp.com/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+unknown:
+  media:
+    url: /media/**
+    path: http://localhost:8081/media
+    folder-in: ./media
+    folder-out: file:./media/
+
+server:
+  port: 8082
