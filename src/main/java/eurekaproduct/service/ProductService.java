@@ -13,5 +13,5 @@ public interface ProductService extends BaseServiceCommon<ProductInfo, ProductDT
 
     ProductDTO update(MultipartFile img, Map<String, String> data);
 
-    ProductDTO create(MultipartFile img, Map<String, String> data);
+    ProductDTO createObjectWithImage(MultipartFile img, ProductDTO productDTO);
 }

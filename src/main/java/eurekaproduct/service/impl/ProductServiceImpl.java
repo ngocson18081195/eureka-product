@@ -60,6 +60,23 @@ public class ProductServiceImpl extends BaseService<ProductDTO, ProductEntity,
     }
 
     @Override
+    protected void processConvert(MultipartFile multipartFile, ProductEntity entity,
+                                  ProductDTO dto) {
+        // Handle file
+        String imgUrl = this.fileUtils.saveImage(multipartFile, "product");
+        dto.setImageUrl(imgUrl);
+        // Handle entity
+        this.productConverter.convertProductEntity(entity, dto);
+        this.productRepository.save(entity);
+        dto.setId(entity.getId());
+    }
+
+    @Override
+    protected boolean checkExist(ProductDTO dto) {
+        return this.productRepository.existsByCode(dto.getCode());
+    }
+
+    @Override
     protected void deleteEntity(ProductEntity productEntity) {
         this.productRepository.delete(productEntity);
     }
@@ -67,7 +84,6 @@ public class ProductServiceImpl extends BaseService<ProductDTO, ProductEntity,
     @Override
     protected ProductEntity createNewEntity() {
         ProductEntity productEntity = new ProductEntity();
-        // Implement
         return productEntity;
     }
 
@@ -108,28 +124,29 @@ public class ProductServiceImpl extends BaseService<ProductDTO, ProductEntity,
         throw new UnknownException(messageNotFound);
     }
 
-    @Override
-    public ProductDTO create(MultipartFile img, Map<String, String> data) {
-        ProductDTO dto = this.objectMapper.convertValue(data, ProductDTO.class);
-        // Verification
-        if (Objects.nonNull(dto.getId())) {
-            String message = "New object mustn't include id";
-            throw new UnknownException(message);
-        }
-        if (this.productRepository.existsByCode(dto.getCode())) {
-            String message = String.format("Product's code [%s] must be unique.", dto.getCode());
-            throw new UnknownException(message);
-        }
-        // Handle file
-        String imgUrl = this.fileUtils.saveImage(img, "product");
-        dto.setImageUrl(imgUrl);
-        // Handle entity
-        ProductEntity entity = this.createNewEntity();
-        this.productConverter.convertProductEntity(entity, dto);
-        this.productRepository.save(entity);
-        dto.setId(entity.getId());
-        return dto;
-    }
+//    @Override
+//    public ProductDTO create(MultipartFile img, Map<String, String> data) {
+//        ProductDTO dto = this.objectMapper.convertValue(data, ProductDTO.class);
+//        // Verification
+//        if (Objects.nonNull(dto.getId())) {
+//            String message = "New object mustn't include id";
+//            throw new UnknownException(message);
+//        }
+//        if (this.productRepository.existsByCode(dto.getCode())) {
+//            String message = String.format("Product's code [%s] must be unique.", dto.getCode());
+//            throw new UnknownException(message);
+//        }
+//        // Handle file
+//        String imgUrl = this.fileUtils.saveImage(img, "product");
+//        dto.setImageUrl(imgUrl);
+//        // Handle entity
+//        ProductEntity entity = this.createNewEntity();
+//        this.productConverter.convertProductEntity(entity, dto);
+//        this.productRepository.save(entity);
+//        dto.setId(entity.getId());
+//        return dto;
+//    }
+
 
     private ProductInfo initialInfo() {
         return new ProductInfo();

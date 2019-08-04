@@ -5,6 +5,8 @@ import eurekaproduct.base.entity.BaseEntity;
 import eurekaproduct.base.dto.BaseCommonDTO;
 import eurekaproduct.exception.UnknownException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.Assert;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,16 +50,20 @@ public abstract class BaseService<O extends BaseCommonDTO, E extends BaseEntity,
         return false;
     }
 
-    public O create(O dto) {
+    public O createObjectWithImage(MultipartFile multipartFile, O dto) {
         log.info("Event create object {} - START", dto);
-        E foundEntity = this.findByName(dto.getName());
-
+        boolean entity = this.checkExist(dto);
+        Assert.isTrue(!entity, String.format("Entity existed [%s].", dto));
         E newEntity = this.createNewEntity();
-
+        this.processConvert(multipartFile, newEntity, dto);
         O createDto = this.convertToDTO(newEntity);
-        log.info("Event create object {} - END", createDto);
+        log.info("Even  t create object {} - END", createDto);
         return createDto;
     }
+
+    protected abstract void processConvert(MultipartFile multipartFile, E entity, O dto);
+
+    protected abstract boolean checkExist(O dto);
 
     protected abstract void deleteEntity(E entity);
 

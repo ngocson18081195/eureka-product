@@ -1,5 +1,8 @@
 package eurekaproduct.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import eurekaproduct.annotation.Logging;
 import eurekaproduct.base.controller.BaseController;
 import eurekaproduct.common.Response;
@@ -64,8 +67,12 @@ public class ProductController extends BaseController {
 
     @PostMapping
     @Logging
-    public Response create(@RequestParam("img") MultipartFile img, @RequestParam Map<String, String> data) {
-        ProductDTO result = this.productService.create(img, data);
+    public Response create(@RequestParam("file") MultipartFile img,
+                           @RequestParam("product") String product) {
+
+        Gson gson = new Gson();
+        ProductDTO productDTO = gson.fromJson(product, ProductDTO.class);
+        ProductDTO result = this.productService.createObjectWithImage(img, productDTO);
         return Response.Builder.buildSuccess(result);
     }
 
