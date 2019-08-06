@@ -1,5 +1,6 @@
 package rio.unknown.management.service.impl;
 
+import org.springframework.beans.factory.annotation.Value;
 import rio.unknown.base.service.BaseService;
 import rio.unknown.common.FileUtils;
 import rio.unknown.exception.UnknownException;

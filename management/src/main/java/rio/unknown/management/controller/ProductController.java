@@ -1,5 +1,6 @@
 package rio.unknown.management.controller;
 
+import org.springframework.web.bind.annotation.*;
 import rio.unknown.annotation.Logging;
 import rio.unknown.base.controller.BaseController;
 import rio.unknown.common.Response;
@@ -15,14 +16,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
@@ -71,14 +64,16 @@ public class ProductController extends BaseController {
 
     @PostMapping
     @Logging
-    public Response create(@RequestParam(value = "img", required = false) MultipartFile img, @RequestParam Map<String, String> data) {
+    public Response create(@RequestParam(value = "img", required = false) MultipartFile img,
+                           @RequestParam Map<String, String> data) {
         ProductDTO result = this.productService.create(img, data);
         return Response.Builder.buildSuccess(result);
     }
 
     @PutMapping
     @Logging
-    public Response update(@RequestParam(value = "img", required = false) MultipartFile img, @RequestParam Map<String, String> data) {
+    public Response update(@RequestParam(value = "img", required = false) MultipartFile img,
+                           @RequestParam Map<String, String> data) {
         ProductDTO result = this.productService.update(img, data);
         return Response.Builder.buildSuccess(result);
     }

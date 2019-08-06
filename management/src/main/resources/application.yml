@@ -70,4 +70,9 @@ management:
       exposure:
         include: '*'
 
+secret:
+  dropbox:
+    appKey: ui9sz6kmoexvyoh
+    appSecret: tmt3gv8ymcid50e
+
 #eureka.client.serviceUrl.defaultZone=http://localhost:8000/eureka/
