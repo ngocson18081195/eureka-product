@@ -1,6 +1,6 @@
 package rio.unknown.management.service.impl;
 
-import org.springframework.beans.factory.annotation.Value;
+import com.dropbox.core.DbxException;
 import rio.unknown.base.service.BaseService;
 import rio.unknown.common.FileUtils;
 import rio.unknown.exception.UnknownException;
@@ -11,6 +11,8 @@ import rio.unknown.management.entity.ProductEntity;
 import rio.unknown.management.repository.ProductRepository;
 import rio.unknown.management.service.ProductService;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -22,6 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import rio.unknown.service.DropBoxService;
 
 /**
  * Create by ngocson on 16/06/2019
@@ -40,6 +43,9 @@ public class ProductServiceImpl extends BaseService<ProductDTO, ProductEntity, P
 
     @Autowired
     private FileUtils fileUtils;
+
+    @Autowired
+    private DropBoxService dropBoxService;
 
     @Override
     protected ProductDTO createNewDto() {
@@ -120,6 +126,21 @@ public class ProductServiceImpl extends BaseService<ProductDTO, ProductEntity, P
         if (this.productRepository.existsByCode(dto.getCode())) {
             String message = String.format("Product's code [%s] must be unique.", dto.getCode());
             throw new UnknownException(message);
+        }
+
+        InputStream inputStream = null;
+        try {
+            inputStream = img.getInputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            this.dropBoxService.saveFile("/" + img.getOriginalFilename(), inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (DbxException e) {
+            e.printStackTrace();
         }
         // Handle file
         String imgUrl = this.fileUtils.saveImage(img, "product");

@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import lombok.Cleanup;
 import lombok.extern.slf4j.Slf4j;
 
 @Component
@@ -31,16 +30,18 @@ public class FileUtils {
         String imgName = System.currentTimeMillis() + "-" + img.getOriginalFilename();
         String imgPath = Strings.join(Arrays.asList("", category, imgName), FileUtils.SEPARATE);
         String imgLocation = this.directory + imgPath;
-        try {
-            Path path = Paths.get(imgLocation);
+        OutputStream outputStream = null;
+        Path path = Paths.get(imgLocation);
+        try (InputStream inputStream = img.getInputStream()) {
             if (!path.toFile().exists()) {
                 Files.createDirectories(path.getParent());
             }
-            @Cleanup InputStream inputStream = img.getInputStream();
-            @Cleanup OutputStream outputStream = Files.newOutputStream(path);
+            outputStream = Files.newOutputStream(path);
             IOUtils.copy(inputStream, outputStream);
         } catch (IOException e) {
             log.error(e.getMessage(), e);
+        } finally {
+            IOUtils.closeQuietly(outputStream);
         }
         return this.pathUrl + imgPath;
     }
