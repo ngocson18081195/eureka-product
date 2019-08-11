@@ -1,9 +1,8 @@
 package rio.unknown.management.service.impl;
 
-import com.dropbox.core.DbxException;
 import rio.unknown.base.service.BaseService;
-import rio.unknown.common.FileUtils;
 import rio.unknown.exception.UnknownException;
+import rio.unknown.handler.FileHandler;
 import rio.unknown.info.ProductInfo;
 import rio.unknown.management.converter.ProductConverter;
 import rio.unknown.management.dto.ProductDTO;
@@ -11,8 +10,6 @@ import rio.unknown.management.entity.ProductEntity;
 import rio.unknown.management.repository.ProductRepository;
 import rio.unknown.management.service.ProductService;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -24,7 +21,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import rio.unknown.service.DropBoxService;
 
 /**
  * Create by ngocson on 16/06/2019
@@ -42,10 +38,7 @@ public class ProductServiceImpl extends BaseService<ProductDTO, ProductEntity, P
     private ObjectMapper objectMapper;
 
     @Autowired
-    private FileUtils fileUtils;
-
-    @Autowired
-    private DropBoxService dropBoxService;
+    private FileHandler fileHandler;
 
     @Override
     protected ProductDTO createNewDto() {
@@ -104,7 +97,7 @@ public class ProductServiceImpl extends BaseService<ProductDTO, ProductEntity, P
         if (optEntity.isPresent()) {
             ProductEntity entity = optEntity.get();
             // handle file
-            String imgUrl = this.fileUtils.saveImage(img, "product");
+            String imgUrl = this.fileHandler.saveImage(img, "product");
             dto.setImageUrl(imgUrl);
             // update
             this.productConverter.convertProductEntity(entity, dto);
@@ -118,7 +111,6 @@ public class ProductServiceImpl extends BaseService<ProductDTO, ProductEntity, P
     @Override
     public ProductDTO create(MultipartFile img, Map<String, String> data) {
         ProductDTO dto = this.objectMapper.convertValue(data, ProductDTO.class);
-        // Verification
         if (Objects.nonNull(dto.getId())) {
             String message = "New object mustn't include id";
             throw new UnknownException(message);
@@ -127,23 +119,8 @@ public class ProductServiceImpl extends BaseService<ProductDTO, ProductEntity, P
             String message = String.format("Product's code [%s] must be unique.", dto.getCode());
             throw new UnknownException(message);
         }
-
-        InputStream inputStream = null;
-        try {
-            inputStream = img.getInputStream();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            this.dropBoxService.saveFile("/" + img.getOriginalFilename(), inputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (DbxException e) {
-            e.printStackTrace();
-        }
         // Handle file
-        String imgUrl = this.fileUtils.saveImage(img, "product");
+        String imgUrl = this.fileHandler.saveImage(img, "product");
         dto.setImageUrl(imgUrl);
         // Handle entity
         ProductEntity entity = this.createNewEntity();

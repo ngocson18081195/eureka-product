@@ -39,10 +39,10 @@ spring:
 
 unknown:
   media:
-    url: /media/**
-    path: http://localhost:8081/media
-    folder-in: ./media
-    folder-out: file:./media/
+    folder: /media
+    host: http://localhost:8081
+    uri: ${unknown.media.folder}/**
+    path: ${unknown.media.host}${unknown.media.folder}
 
 #spring:
 #  cloud:
@@ -69,10 +69,5 @@ management:
     web:
       exposure:
         include: '*'
-
-secret:
-  dropbox:
-    appKey: ui9sz6kmoexvyoh
-    appSecret: tmt3gv8ymcid50e
 
 #eureka.client.serviceUrl.defaultZone=http://localhost:8000/eureka/
