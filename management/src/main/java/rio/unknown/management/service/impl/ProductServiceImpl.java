@@ -1,5 +1,6 @@
 package rio.unknown.management.service.impl;
 
+import org.apache.commons.lang.BooleanUtils;
 import rio.unknown.base.service.BaseService;
 import rio.unknown.exception.UnknownException;
 import rio.unknown.handler.FileHandler;
@@ -130,6 +131,11 @@ public class ProductServiceImpl extends BaseService<ProductDTO, ProductEntity, P
         return dto;
     }
 
+    @Override
+    public boolean deleteAll(List<Long> ids) {
+        return ids.stream().map(this::delete).allMatch(BooleanUtils::isTrue);
+    }
+
     private ProductInfo initialInfo() {
         return new ProductInfo();
     }
@@ -137,5 +143,4 @@ public class ProductServiceImpl extends BaseService<ProductDTO, ProductEntity, P
     private ProductDTO initialDto() {
         return new ProductDTO();
     }
-
 }

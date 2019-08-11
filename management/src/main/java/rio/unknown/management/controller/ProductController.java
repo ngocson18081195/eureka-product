@@ -91,4 +91,11 @@ public class ProductController extends BaseController {
         boolean success = this.productService.delete(id);
         return Response.Builder.buildSuccess(success);
     }
+
+    @DeleteMapping
+    @Logging
+    public Response deleteMany(@RequestBody List<Long> ids) {
+        boolean success = this.productService.deleteAll(ids);
+        return Response.Builder.buildSuccess(success);
+    }
 }
