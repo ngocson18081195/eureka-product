@@ -40,7 +40,7 @@ spring:
 unknown:
   media:
     url: /media/**
-    path: http://localhost:8081/media
+    path: https://protected-wave-31261.herokuapp.com/media
     folder-in: ./media
     folder-out: file:./media/
 
