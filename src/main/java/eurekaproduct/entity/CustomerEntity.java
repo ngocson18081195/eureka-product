@@ -1,7 +1,10 @@
 package eurekaproduct.entity;
 
 import eurekaproduct.base.entity.BaseCommonEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,6 +15,9 @@ import java.util.List;
 @Entity
 @Table(name = "CustomerEntity")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 public class CustomerEntity extends BaseCommonEntity {
 
     @Column(name = "Address", nullable = true)

@@ -11,7 +11,10 @@ import javax.persistence.Table;
 
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * Create by ngocson on 18/05/2019
@@ -19,6 +22,10 @@ import lombok.Data;
 @Entity
 @Table(name = "product")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
+
 public class ProductEntity extends AuditingEntity {
 
     @Column(name = "ProductCode", unique = true, nullable = false)

@@ -1,8 +1,7 @@
 package eurekaproduct.entity;
 
 import eurekaproduct.base.entity.BaseEntity;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,6 +11,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "orderDetail")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
+
 @ToString(callSuper = true, exclude = {"orderEntity", "productEntity"})
 public class OrderDetailEntity extends BaseEntity {
 

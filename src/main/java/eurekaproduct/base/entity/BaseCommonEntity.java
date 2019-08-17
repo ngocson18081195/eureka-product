@@ -1,6 +1,8 @@
 package eurekaproduct.base.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
@@ -10,6 +12,8 @@ import javax.persistence.MappedSuperclass;
  */
 @MappedSuperclass
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class BaseCommonEntity extends BaseEntity {
 
     @Column(name = "name")
