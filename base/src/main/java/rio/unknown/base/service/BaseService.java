@@ -1,5 +1,6 @@
 package rio.unknown.base.service;
 
+import org.apache.commons.lang.BooleanUtils;
 import rio.unknown.base.dto.BaseCommonDTO;
 import rio.unknown.base.entity.BaseEntity;
 import rio.unknown.exception.UnknownException;
@@ -59,6 +60,10 @@ public abstract class BaseService<O extends BaseCommonDTO, E extends BaseEntity,
         O createDto = this.convertToDTO(newEntity);
         log.info("Event create object {} - END", createDto);
         return createDto;
+    }
+
+    public boolean deleteAll(List<Long> ids) {
+        return ids.stream().map(this::delete).allMatch(BooleanUtils::isTrue);
     }
 
     protected abstract void deleteEntity(E entity);

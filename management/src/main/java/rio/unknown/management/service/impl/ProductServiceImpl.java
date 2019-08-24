@@ -131,11 +131,6 @@ public class ProductServiceImpl extends BaseService<ProductDTO, ProductEntity, P
         return dto;
     }
 
-    @Override
-    public boolean deleteAll(List<Long> ids) {
-        return ids.stream().map(this::delete).allMatch(BooleanUtils::isTrue);
-    }
-
     private ProductInfo initialInfo() {
         return new ProductInfo();
     }
